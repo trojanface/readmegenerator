@@ -20,7 +20,7 @@ inquirer.prompt([
     {
         name: "Contents",
         type: "input",
-        message: "Table of Contents:"
+        message: "Table of Contents (yes/no):"
     },
     {
         name: "Screenshot",
@@ -60,34 +60,55 @@ inquirer.prompt([
     {
         name: "Address",
         type: "input",
-        message: "gitHub email address?"
+        message: "Contact email address:"
     }
 ]).then(function (data) {
-    fs.writeFile("README.md",
-        `#${data.Project_Title}
+    let tableOfContents = "\n## Table of Contents\n";
+    if (data.Contents === "yes") {
+        for (property in data) {
+            if (data[property] != "") {
+                tableOfContents += `\n${property}`;
+            }
+            console.log(`key= ${property} value = ${data[property]}`)
+        }
+    }
 
-##Description
+
+    fs.writeFile("README.md",
+        `# ${data.Project_Title}
+        By ${data.Username} ${data.Contributors}
+
+## Description
 ${data.Description}
 
-##Table of Contents
-${data.Contents}
+Badges will go here
 
-##Installation
+build status
+issues (waffle.io maybe)
+devDependencies
+npm package
+coverage
+
+Screenshot here
+${tableOfContents}
+
+## Installation
 ${data.Installation}
 
-##Usage
+## Usage
 ${data.Usage}
 
-##License
+## License
 ${data.License}
 
-##Contributing
+## Contributing
 ${data.Contributors}
 
-##Tests
+## Tests
 ${data.Tests}
 
-##Questions
+## Contact Information
+${data.Username}
 ${data.Address}
         `,
         function (err) {
