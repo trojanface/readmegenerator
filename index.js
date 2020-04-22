@@ -18,10 +18,14 @@ inquirer.prompt([
         message: "Description:"
     },
     {
+        type: "list",
+        message: "Include a Table of Contents:",
         name: "Contents",
-        type: "input",
-        message: "Table of Contents (yes/no):"
-    },
+        choices: [
+          "Yes",
+          "No"
+        ]
+      },
     {
         name: "Screenshot",
         type: "input",
@@ -53,10 +57,15 @@ inquirer.prompt([
         message: "Tests:"
     },
     {
-        name: "Picture",
-        type: "input",
-        message: "gitHub profile picture?"
-    },
+        type: "list",
+        message: "Preferred Contact Method:",
+        name: "contact",
+        choices: [
+          "email",
+          "phone",
+          "telekinesis"
+        ]
+      },
     {
         name: "Address",
         type: "input",
@@ -64,53 +73,68 @@ inquirer.prompt([
     }
 ]).then(function (data) {
     let tableOfContents = "\n## Table of Contents\n";
-    if (data.Contents === "yes") {
-        for (property in data) {
-            if (data[property] != "") {
-                tableOfContents += `\n${property}`;
+    let readMeContent ="";
+    for (property in data) {
+        if (data[property] !== "" && property !== "Contents") {
+            readMeContent += `\n## ${property}\n${data[property]}\n`;
+        }
+        if (property === "Contents") {
+            if (data.Contents === "Yes") {
+                for (property in data) {
+                    if (data[property] != "") {
+                        tableOfContents += `\n${property}`;
+                    }
+                    console.log(`key= ${property} value = ${data[property]}`)
+                }
+            } else {
+                tableOfContents = "";
             }
-            console.log(`key= ${property} value = ${data[property]}`)
         }
     }
 
 
+
+
+
+
     fs.writeFile("README.md",
-        `# ${data.Project_Title}
-        By ${data.Username} ${data.Contributors}
+    readMeContent,
+//         `# ${data.Project_Title}
+//         By ${data.Username} ${data.Contributors}
 
-## Description
-${data.Description}
+// ## Description
+// ${data.Description}
 
-Badges will go here
+// Badges will go here
 
-build status
-issues (waffle.io maybe)
-devDependencies
-npm package
-coverage
+// build status
+// issues (waffle.io maybe)
+// devDependencies
+// npm package
+// coverage
 
-Screenshot here
-${tableOfContents}
+// Screenshot here
+// ${tableOfContents}
 
-## Installation
-${data.Installation}
+// ## Installation
+// ${data.Installation}
 
-## Usage
-${data.Usage}
+// ## Usage
+// ${data.Usage}
 
-## License
-${data.License}
+// ## License
+// ${data.License}
 
-## Contributing
-${data.Contributors}
+// ## Contributing
+// ${data.Contributors}
 
-## Tests
-${data.Tests}
+// ## Tests
+// ${data.Tests}
 
-## Contact Information
-${data.Username}
-${data.Address}
-        `,
+// ## Contact Information
+// ${data.Username}
+// ${data.Address}
+//         `
         function (err) {
 
             if (err) {

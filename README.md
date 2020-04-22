@@ -1,31 +1,15 @@
-# adfsg
-        By asg 
+
+## Username
+trojanface
+
+## Project_Title
+my project
 
 ## Description
-as
+its a thing
 
-## Table of Contents
+## Screenshot
+none
 
-Username
-Project_Title
-Description
-
-## Installation
-
-
-## Usage
-
-
-## License
-
-
-## Contributing
-
-
-## Tests
-
-
-## Contact Information
-asg
-
-        
+## contact
+email
