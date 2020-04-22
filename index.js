@@ -18,6 +18,11 @@ inquirer.prompt([
         message: "Description:"
     },
     {
+        name: "Contents",
+        type: "input",
+        message: "Table of Contents:"
+    },
+    {
         name: "Screenshot",
         type: "input",
         message: "Screenshot Link/s:"
@@ -62,21 +67,28 @@ inquirer.prompt([
         `#${data.Project_Title}
 
 ##Description
+${data.Description}
 
 ##Table of Contents
+${data.Contents}
 
 ##Installation
+${data.Installation}
 
 ##Usage
+${data.Usage}
 
 ##License
+${data.License}
 
 ##Contributing
+${data.Contributors}
 
 ##Tests
+${data.Tests}
 
 ##Questions
-    
+${data.Address}
         `,
         function (err) {
 
