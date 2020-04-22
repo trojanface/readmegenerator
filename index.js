@@ -6,11 +6,23 @@ inquirer.prompt([
         type: "input",
         name: "Username",
         message: "gitHub username:"
+        validate: (input) => {
+            if (input === "") {
+                return "Must be answered";
+            }
+            return true;
+        }
     },
     {
         type: "input",
         name: "Project_Title",
-        message: "Project Title:"
+        message: "Project Title:",
+        validate: (input) => {
+            if (input === "") {
+                return "Must be answered";
+            }
+            return true;
+        }
     },
     {
         name: "Description",
@@ -18,14 +30,10 @@ inquirer.prompt([
         message: "Description:"
     },
     {
-        type: "list",
+        type: "confirm",
         message: "Include a Table of Contents:",
-        name: "Contents",
-        choices: [
-          "Yes",
-          "No"
-        ]
-      },
+        name: "Contents"
+    },
     {
         name: "Screenshot",
         type: "input",
@@ -33,12 +41,12 @@ inquirer.prompt([
     },
     {
         name: "Installation",
-        type: "input",
+        type: "editor",
         message: "Installation Instructions:"
     },
     {
         name: "Usage",
-        type: "input",
+        type: "editor",
         message: "Usage Instructions:"
     },
     {
@@ -59,13 +67,13 @@ inquirer.prompt([
     {
         type: "list",
         message: "Preferred Contact Method:",
-        name: "contact",
+        name: "Contact",
         choices: [
-          "email",
-          "phone",
-          "telekinesis"
+            "email",
+            "phone",
+            "telekinesis"
         ]
-      },
+    },
     {
         name: "Address",
         type: "input",
@@ -73,23 +81,50 @@ inquirer.prompt([
     }
 ]).then(function (data) {
     let tableOfContents = "\n## Table of Contents\n";
-    let readMeContent ="";
+    let readMeContent = "";
     for (property in data) {
-        if (data[property] !== "" && property !== "Contents") {
-            readMeContent += `\n## ${property}\n${data[property]}\n`;
-        }
-        if (property === "Contents") {
-            if (data.Contents === "Yes") {
-                for (property in data) {
-                    if (data[property] != "") {
-                        tableOfContents += `\n${property}`;
+        if (data[property] !== "") {
+            switch (property) {
+                case "Contents":
+                    if (data.Contents === true) {
+                        for (property in data) {
+                            if (data[property] != "") {
+                                tableOfContents += `\n${property}`;
+                            }
+                            console.log(`key= ${property} value = ${data[property]}`)
+                        }
+                    } else {
+                        tableOfContents = "";
                     }
-                    console.log(`key= ${property} value = ${data[property]}`)
-                }
-            } else {
-                tableOfContents = "";
+                    readMeContent += tableOfContents;
+                    break;
+                case "Project_Title":
+                    readMeContent += `\n# ${data[property]}\n### By ${data.Username}\n`;
+                    break;
+                case "Username":
+                    break;
+                default:
+                    readMeContent += `\n## ${property}\n${data[property]}\n`;
             }
         }
+
+
+
+        // if (data[property] !== "" && property !== "Contents") {
+        //     readMeContent += `\n## ${property}\n${data[property]}\n`;
+        // }
+        // if (property === "Contents") {
+        //     if (data.Contents === "Yes") {
+        //         for (property in data) {
+        //             if (data[property] != "") {
+        //                 tableOfContents += `\n${property}`;
+        //             }
+        //             console.log(`key= ${property} value = ${data[property]}`)
+        //         }
+        //     } else {
+        //         tableOfContents = "";
+        //     }
+        // }
     }
 
 
@@ -98,43 +133,43 @@ inquirer.prompt([
 
 
     fs.writeFile("README.md",
-    readMeContent,
-//         `# ${data.Project_Title}
-//         By ${data.Username} ${data.Contributors}
+        readMeContent,
+        //         `# ${data.Project_Title}
+        //         By ${data.Username} ${data.Contributors}
 
-// ## Description
-// ${data.Description}
+        // ## Description
+        // ${data.Description}
 
-// Badges will go here
+        // Badges will go here
 
-// build status
-// issues (waffle.io maybe)
-// devDependencies
-// npm package
-// coverage
+        // build status
+        // issues (waffle.io maybe)
+        // devDependencies
+        // npm package
+        // coverage
 
-// Screenshot here
-// ${tableOfContents}
+        // Screenshot here
+        // ${tableOfContents}
 
-// ## Installation
-// ${data.Installation}
+        // ## Installation
+        // ${data.Installation}
 
-// ## Usage
-// ${data.Usage}
+        // ## Usage
+        // ${data.Usage}
 
-// ## License
-// ${data.License}
+        // ## License
+        // ${data.License}
 
-// ## Contributing
-// ${data.Contributors}
+        // ## Contributing
+        // ${data.Contributors}
 
-// ## Tests
-// ${data.Tests}
+        // ## Tests
+        // ${data.Tests}
 
-// ## Contact Information
-// ${data.Username}
-// ${data.Address}
-//         `
+        // ## Contact Information
+        // ${data.Username}
+        // ${data.Address}
+        //         `
         function (err) {
 
             if (err) {

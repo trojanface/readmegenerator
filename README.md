@@ -1,15 +1,29 @@
 
-## Username
-trojanface
-
-## Project_Title
-my project
+# My project
+### By matt
 
 ## Description
-its a thing
+Its a project
 
-## Screenshot
-none
+## Table of Contents
+
+Username
+Project_Title
+Description
+Contents
+Installation
+License
+Contributors
+contact
+## Installation
+1. Install it
+2. Run it
+
+## License
+None
+
+## Contributors
+Me
 
 ## contact
 email
