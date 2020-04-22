@@ -5,7 +5,7 @@ inquirer.prompt([
     {
         type: "input",
         name: "Username",
-        message: "gitHub username:"
+        message: "gitHub username:",
         validate: (input) => {
             if (input === "") {
                 return "Must be answered";
@@ -37,7 +37,7 @@ inquirer.prompt([
     {
         name: "Screenshot",
         type: "input",
-        message: "Screenshot Link/s:"
+        message: "Screenshot Link/s (seperate by , ):"
     },
     {
         name: "Installation",
@@ -103,73 +103,20 @@ inquirer.prompt([
                     break;
                 case "Username":
                     break;
+                case "Screenshot":
+                    let screenShots = data[property].split(",");
+                    screenShots.forEach(element => {
+                        readMeContent += `\n![A screenshot of ${data.Project_Title}](${element})\n`;
+                    });
+                    break;
                 default:
                     readMeContent += `\n## ${property}\n${data[property]}\n`;
             }
         }
 
-
-
-        // if (data[property] !== "" && property !== "Contents") {
-        //     readMeContent += `\n## ${property}\n${data[property]}\n`;
-        // }
-        // if (property === "Contents") {
-        //     if (data.Contents === "Yes") {
-        //         for (property in data) {
-        //             if (data[property] != "") {
-        //                 tableOfContents += `\n${property}`;
-        //             }
-        //             console.log(`key= ${property} value = ${data[property]}`)
-        //         }
-        //     } else {
-        //         tableOfContents = "";
-        //     }
-        // }
     }
-
-
-
-
-
-
     fs.writeFile("README.md",
         readMeContent,
-        //         `# ${data.Project_Title}
-        //         By ${data.Username} ${data.Contributors}
-
-        // ## Description
-        // ${data.Description}
-
-        // Badges will go here
-
-        // build status
-        // issues (waffle.io maybe)
-        // devDependencies
-        // npm package
-        // coverage
-
-        // Screenshot here
-        // ${tableOfContents}
-
-        // ## Installation
-        // ${data.Installation}
-
-        // ## Usage
-        // ${data.Usage}
-
-        // ## License
-        // ${data.License}
-
-        // ## Contributing
-        // ${data.Contributors}
-
-        // ## Tests
-        // ${data.Tests}
-
-        // ## Contact Information
-        // ${data.Username}
-        // ${data.Address}
-        //         `
         function (err) {
 
             if (err) {

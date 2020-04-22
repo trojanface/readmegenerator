@@ -1,29 +1,19 @@
 
-# My project
+# example
 ### By matt
 
-## Description
-Its a project
+![A screenshot of example](png1.png)
 
-## Table of Contents
+![A screenshot of example](png2.png)
 
-Username
-Project_Title
-Description
-Contents
-Installation
-License
-Contributors
-contact
-## Installation
-1. Install it
-2. Run it
+![A screenshot of example](png3.png)
 
-## License
-None
+![A screenshot of example](png4.png)
 
-## Contributors
-Me
+## Usage
+this is how you use it
+line 1
+line 2
 
-## contact
+## Contact
 email
