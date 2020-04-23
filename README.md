@@ -7,15 +7,15 @@ A node script to assist with the creation of comprehensive readme files. By aski
 
 ## Table of Contents
 
-Description
-Contents
-Screenshot
-Deployed
-Installation
-Usage
-License
-Contact
-Address
+1. Description
+2. Contents
+3. Screenshot
+4. Deployed
+5. Installation
+6. Usage
+7. License
+8. Contact
+9. Address
 
 ![A screenshot of Readme Generator](screenshot1.png)
 
@@ -29,7 +29,7 @@ https://not yet deployed
 ## Usage
 1. Run script with node. e.g. (node index.js)
 2. Answer the questions.
-3. Find the created README file in the selected directory.
+3. Find the created README file in the folder where index.js runs.
 
 ## License
 Personal Use

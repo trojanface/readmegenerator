@@ -106,12 +106,15 @@ inquirer.prompt([
                 //table of contents will generate based on the properties which have been answered not including formatting properties such as username and project title.
                 case "Contents":
                     if (data.Contents === true) { //checks that a contents table has been selected to include.
+                        let i = 1;
                         for (property in data) {
                             if (property != "Username" && property != "Project_Title") { //Ensures current property isn't a formatting property.
                                 if (data[property] != "") {
-                                    tableOfContents += `\n${property}`; //Adds the property to the table of contents variable.
+                                    tableOfContents += `\n${i}. ${property}`; //Adds the property to the table of contents variable.
+                                    i++;
                                 }
                             }
+                            
                         }
                     } else {
                         tableOfContents = "";
