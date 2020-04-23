@@ -17,10 +17,8 @@ A node script to assist with the creation of comprehensive readme files. By aski
 8. Contact
 9. Address
 
+![badge](https://img.shields.io/npm/v/inquirer?style=plastic)
 ![A screenshot of Readme Generator](screenshot1.png)
-
-## Link to Deployed App
-https://not yet deployed
 
 ## Installation
 1. Must run a npm install to download inquirer package from npm.
