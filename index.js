@@ -139,7 +139,7 @@ inquirer.prompt([
                         readMeContent += `\n## ${property}\n${data[property]} - `;
                     break;
                     case "Address"://Special formatting for the address property
-                        readMeContent += `${data[property]}`;
+                        readMeContent += `${data[property]}\n\n![badge](https://img.shields.io/badge/isAwesome-YES-green)`;
                     break;
                 default://By default it adds the property as a title and its value as the text beneath
                     readMeContent += `\n## ${property}\n${data[property]}\n`;
